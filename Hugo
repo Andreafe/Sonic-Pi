@@ -1,0 +1,26 @@
+use_bpm 120
+
+hugo = "/Users/andreafenu/Desktop/hugo.wav"
+
+load_sample hugo
+
+define :sample_chunk do |what, beat, dur, delay|
+  beat = beat / 8.0
+  dur = dur / 8.0
+  sample what, beat_stretch: 16, start: beat, finish: beat + dur
+  sleep delay
+end
+
+define :giro do
+  sample_chunk(hugo, 0.0, 1.0, 0.5)
+  sample_chunk(hugo, 2.0, 1.0, 0.5)
+  sample_chunk(hugo, 2.0, 1.0, 0.5)
+  sample_chunk(hugo, 3.5, 1.0, 0.5)
+  sample_chunk(hugo, 5.5, 1.0, 0.5)
+  sample_chunk(hugo, 2.0, 2.0, 0.5)
+  sample_chunk(hugo, 0.0, 1.0, 0.5)
+end
+
+live_loop :nome do
+  giro
+end
